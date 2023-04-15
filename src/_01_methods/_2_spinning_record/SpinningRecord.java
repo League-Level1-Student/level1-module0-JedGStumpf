@@ -1,8 +1,11 @@
 package _01_methods._2_spinning_record;
 
+import java.awt.event.*;
+
 import game_tools.Sound;
 import processing.core.PApplet;
 import processing.core.PImage;
+
 
 /*
  * Goal: Make a record spin and play music!
@@ -41,20 +44,40 @@ public class SpinningRecord extends PApplet {
     
     Song song = new Song("awesomeTrack.mp3");
     PImage pictureOfRecord;
+
+    int rotations = 10;
+    
     
     @Override
     public void settings() {
-        size(WIDTH, HEIGHT);
+        size(HEIGHT, WIDTH);
     }
 
     @Override
     public void setup() {
+
+        pictureOfRecord= loadImage("record.png");
+        pictureOfRecord.resize(HEIGHT, WIDTH);
         
     }
 
     @Override
     public void draw() {
-        
+    	if (mousePressed) {
+//    		System.out.println(mouseX + " " + mouseY);
+    		rotateImage(pictureOfRecord, rotations);
+    		song.play();
+    	}
+    	rotations += 1;
+    	song.stop();
+// 		rotateImage(pictureOfRecord, rotations);
+
+    	image(pictureOfRecord, 0, 0);
+    	
+    }
+    
+    public void mouseClicked(MouseEvent e) {
+    	
     }
 
     static public void main(String[] args) {
